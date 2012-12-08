@@ -100,4 +100,17 @@ describe User do
 
   end
 
+  ############################################################
+  ##### 08.12.2012
+
+  describe "user's associations" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should be able to have some dogs" do
+      @user.should respond_to(:dogs)
+    end
+  end
+
 end
