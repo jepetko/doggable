@@ -4,7 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'email_spec'
 require 'rspec/autorun'
-require 'capybara/rspec'   #golbie: for using testing methods like 'visit' ...
+#require 'capybara/rspec'   #golbie: for using testing methods like 'visit' ...
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -13,7 +13,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
-  config.include(Capybara::DSL)      #golbie: otherwise methods like 'visit'... are unknown
+ # config.include(Capybara::DSL)      #golbie: otherwise methods like 'visit'... are unknown
 
   # ## Mock Framework
   #

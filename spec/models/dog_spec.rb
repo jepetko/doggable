@@ -14,10 +14,14 @@ describe Dog do
     Dog.new(@attr).should_not be_valid
   end
 
-  describe "dogs associations" do
+  describe "dogs validations and associations" do
 
     before(:each) do
       @dog = @user.dogs.create(@attr)
+    end
+
+    it "should require a valid name" do
+      @dog.name.should_not be_blank
     end
 
     it "should respond to user association" do

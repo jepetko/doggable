@@ -2,7 +2,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @dogs = current_user.dogs
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,16 +40,15 @@ class DogsController < ApplicationController
   # POST /dogs
   # POST /dogs.json
   def create
-    @dog = Dog.new(params[:dog])
-
-    respond_to do |format|
-      if @dog.save
-        format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
-        format.json { render json: @dog, status: :created, location: @dog }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @dog.errors, status: :unprocessable_entity }
-      end
+    p = params[:dog]
+    dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
+    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat )
+    if @dog.save
+      flash[:success] = "Dog created!"
+      redirect_to dogs_path
+    else
+      flash[:error] = "Dogs couldn't be created."
+      render 'dogs#new'
     end
   end
 
