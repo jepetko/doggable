@@ -2,11 +2,15 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = current_user.dogs
+    if current_user.nil?
+      redirect_to users_path
+    else
+      @dogs = current_user.dogs
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @dogs }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @dogs }
+      end
     end
   end
 
@@ -47,8 +51,8 @@ class DogsController < ApplicationController
       flash[:success] = "Dog created!"
       redirect_to dogs_path
     else
-      flash[:error] = "Dogs couldn't be created."
-      render 'dogs#new'
+      flash[:error] = "Dog couldn't be created."
+      render 'new'
     end
   end
 
