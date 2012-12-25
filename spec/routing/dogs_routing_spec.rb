@@ -11,10 +11,6 @@ describe DogsController do
       get("/dogs/new").should route_to("dogs#new")
     end
 
-    it "routes to #show" do
-      get("/dogs/1").should route_to("dogs#show", :id => "1")
-    end
-
     it "routes to #edit" do
       get("/dogs/1/edit").should route_to("dogs#edit", :id => "1")
     end

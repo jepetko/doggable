@@ -1,3 +1,10 @@
 <h3>User</h3>
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<% unless @user.dogs.empty? %>
+<p>Your dogs:</p>
+    <div class="well">
+        <br/>
+        <%= render @dogs %>
+    </div>
+<%end%>

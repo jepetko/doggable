@@ -1,13 +1,4 @@
-<p>
-  <b>Name:</b>
-  <%= @dog.name %>
-</p>
-
-<p>
-  <b>Birthday:</b>
-  <%= @dog.birthday %>
-</p>
-
+<%= render 'dog'%>
 
 <%= link_to 'Edit', edit_dog_path(@dog) %> |
 <%= link_to 'Back', dogs_path %>

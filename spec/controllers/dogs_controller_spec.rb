@@ -22,11 +22,4 @@ describe DogsController do
     end
   end
 
-  describe "GET 'show'" do
-    it "should be successful" do
-      get :show, :id => @dog.id
-      response.should be_success
-    end
-  end
-
 end

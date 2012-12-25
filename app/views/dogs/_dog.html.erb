@@ -1,0 +1,23 @@
+<table class="dogs">
+    <tr>
+      <td>Name:</td>
+      <td><%= dog.name %></td>
+      <td>
+        <div class="btn-group">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            More
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Edit', edit_dog_path(dog) %></li>
+            <li><%= link_to 'Destroy', dog, method: :delete, data: {confirm: 'Are you sure?'} %></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Age:</td>
+      <td><%= dog.age_in_words%></td>
+      <td></td>
+    </tr>
+</table>
