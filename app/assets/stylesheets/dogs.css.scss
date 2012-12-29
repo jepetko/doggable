@@ -3,6 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.dogs {
+.simple-dog {
   width: 100%;
+}
+
+.simple-dog td {
+  padding: 5px;
+}
+
+.form-actions {
+  border: none;
+  background: none;
 }
