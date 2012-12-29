@@ -45,10 +45,13 @@ class DogsController < ApplicationController
   # POST /dogs.json
   def create
     p = params[:dog]
-    dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
+    dat = nil
+    if( p["birthday(1i)"] && p["birthday(2i)"] && p["birthday(3i)"] )
+      dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
+    end
     @dog = current_user.dogs.build( :name => p[:name], :birthday => dat )
     if @dog.save
-      flash[:success] = "Dog created!"
+      flash[:notice] = "Dog created!"
       redirect_to dogs_path
     else
       flash[:error] = "Dog couldn't be created."
@@ -63,7 +66,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.update_attributes(params[:dog])
-        format.html { redirect_to @dog, notice: 'Dog was successfully updated.' }
+        format.html { redirect_to dogs_path, notice: 'Dog was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +82,7 @@ class DogsController < ApplicationController
     @dog.destroy
 
     respond_to do |format|
-      format.html { redirect_to dogs_url }
+      format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
