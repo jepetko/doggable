@@ -5,15 +5,21 @@ class Dog < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :dog_skill_relationships, :foreign_key => :dog_id, :dependent => :destroy
+  has_many :skills, :through => :dog_skill_relationships
+
   def age
+    return { :years => 0, :months => 0, :days => 0 } if self.birthday.nil?
     self.birthday.diff_to_now
   end
 
   def age_in_words
     a = age
+    "" if a.nil?
     str = ""
     str << "#{a[:years]} years " unless a[:years] <= 0
     str << "#{a[:months]} months " unless a[:months] <= 0
     str << "#{a[:days]} days " unless a[:days] <= 0
   end
+
 end

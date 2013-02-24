@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'pg'
@@ -8,7 +9,13 @@ group :assets do
 end
 gem 'jquery-rails'
 gem "thin", ">= 1.5.0"
+
+gem "rspec-core", :group => [:development, :test]
+gem "rspec-expectations", :group => [:development, :test]
+gem "rspec-mocks", :group => [:development, :test]
 gem "rspec-rails", ">= 2.11.4", :group => [:development, :test]
+gem 'faker', :require => false
+
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
