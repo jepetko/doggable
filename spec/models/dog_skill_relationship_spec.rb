@@ -3,7 +3,8 @@ require 'spec_helper'
 describe DogSkillRelationship do
 
   before(:each) do
-    @dog = FactoryGirl.create(:dog)
+    @usr = FactoryGirl.create(:user)
+    @dog = FactoryGirl.create(:dog, :user_id => @usr.id)
 
 
     @skill = FactoryGirl.create(:skill)
@@ -30,10 +31,7 @@ describe DogSkillRelationship do
     end
 
     it "should list all dogs" do
-      @relationship
+      pending
     end
   end
-
-
-
 end
