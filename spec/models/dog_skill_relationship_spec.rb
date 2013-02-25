@@ -7,12 +7,12 @@ describe DogSkillRelationship do
     @dog = FactoryGirl.create(:dog, :user_id => @usr.id)
 
 
-    @skill = FactoryGirl.create(:skill)
+    @skill = FactoryGirl.create(:skills)
 
     @relationship = @dog.dog_skill_relationships.build( :skill_id => @skill.id )
   end
 
-  it "should save the relationship between the dog and the skill" do
+  it "should save the relationship between the dog and the skills" do
     @relationship.save!
   end
 
@@ -28,10 +28,6 @@ describe DogSkillRelationship do
 
     it "should respond to skill_id" do
       @relationship.should respond_to(:skill_id)
-    end
-
-    it "should list all dogs" do
-      pending
     end
   end
 end

@@ -1,0 +1,18 @@
+<table class="simple-skill well">
+  <tr>
+    <td>Name:</td>
+    <td><%= skill.name %></td>
+    <td>
+      <div class="btn-group" style="float:right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          More
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'Edit', edit_skill_path(skill) %></li>
+          <li><%= link_to 'Destroy', skill, method: :delete, data: {confirm: 'Are you sure?'} %></li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+</table>

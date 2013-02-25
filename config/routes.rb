@@ -1,5 +1,6 @@
 Doggable::Application.routes.draw do
   resources :dogs, :except => [:show]
+  resources :skills
 
   authenticated :user do
     root :to => 'home#index'

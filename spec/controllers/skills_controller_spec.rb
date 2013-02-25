@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SkillController do
+describe SkillsController do
 
   before(:each) do
     @user = FactoryGirl.create(:user)

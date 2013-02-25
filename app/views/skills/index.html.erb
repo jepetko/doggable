@@ -1,0 +1,9 @@
+<h1>Listing skills</h1>
+
+<% unless @skills.empty?  %>
+    <%= render @skills %>
+<% end %>
+
+<br />
+
+<%= link_to 'Add new skills', new_skill_path, :class => "btn btn-link" %>
