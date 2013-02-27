@@ -1,7 +1,9 @@
 <h1>Listing skills</h1>
 
 <% unless @skills.empty?  %>
-    <%= render @skills %>
+    <ul class="thumbnails">
+        <%= render @skills %>
+    </ul>
 <% end %>
 
 <br />

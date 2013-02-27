@@ -1,8 +1,9 @@
-<%= simple_form_for(@skill) do |f| %>
+<%= simple_form_for(@skill, :html => {:multipart => true}) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
       <%= f.input :name %>
+      <%= f.file_field :picture %>
     </div>
 
     <div class="form-actions">

@@ -7,7 +7,7 @@ describe DogSkillRelationship do
     @dog = FactoryGirl.create(:dog, :user_id => @usr.id)
 
 
-    @skill = FactoryGirl.create(:skills)
+    @skill = FactoryGirl.create(:skill)
 
     @relationship = @dog.dog_skill_relationships.build( :skill_id => @skill.id )
   end

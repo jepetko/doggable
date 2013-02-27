@@ -1,9 +1,9 @@
-<table class="simple-skill well">
-  <tr>
-    <td>Name:</td>
-    <td><%= skill.name %></td>
-    <td>
-      <div class="btn-group" style="float:right">
+
+  <li class="span4">
+    <div class="thumbnail">
+      <img data-src="holder.js/260x180" src="<%=skill.picture.url(:medium)%>" alt="<%=skill.name%>">
+      <h3><%=skill.name%></h3>
+      <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           More
           <span class="caret"></span>
@@ -13,6 +13,6 @@
           <li><%= link_to 'Destroy', skill, method: :delete, data: {confirm: 'Are you sure?'} %></li>
         </ul>
       </div>
-    </td>
-  </tr>
-</table>
+    </div>
+  </li>
+

@@ -45,7 +45,7 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    p = params[:skills]
+    p = params[:skill]
     @skill = Skill.new(p)
     if @skill.save
       flash[:notice] = "Skill created!"
@@ -59,10 +59,10 @@ class SkillsController < ApplicationController
   # PUT /skills/1
   # PUT /skills/1.json
   def update
-    @dog = Dog.find(params[:id])
+    @skill = Skill.find(params[:id])
 
     respond_to do |format|
-      if @skill.update_attributes(params[:skills])
+      if @skill.update_attributes(params[:skill])
         format.html { redirect_to skills_path, notice: 'Skill was successfully updated.' }
         format.json { head :no_content }
       else
@@ -75,7 +75,7 @@ class SkillsController < ApplicationController
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
-    @skill = Dog.find(params[:id])
+    @skill = Skill.find(params[:id])
     @skill.destroy
 
     respond_to do |format|

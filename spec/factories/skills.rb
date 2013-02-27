@@ -1,7 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :skills do
+  factory :skill do
     name "MyString"
+    picture nil
   end
 end
