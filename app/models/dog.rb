@@ -1,4 +1,5 @@
 class Dog < ActiveRecord::Base
+  include DogsHelper
   attr_accessible :birthday, :name
   validates :user_id, :presence => true
   validates :name, :presence => true
@@ -10,7 +11,7 @@ class Dog < ActiveRecord::Base
 
   def age
     return { :years => 0, :months => 0, :days => 0 } if self.birthday.nil?
-    self.birthday.diff_to_now
+    date_diff_to(self.birthday)
   end
 
   def age_in_words
@@ -20,6 +21,7 @@ class Dog < ActiveRecord::Base
     str << "#{a[:years]} years " unless a[:years] <= 0
     str << "#{a[:months]} months " unless a[:months] <= 0
     str << "#{a[:days]} days " unless a[:days] <= 0
+    str
   end
 
 end

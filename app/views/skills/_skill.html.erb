@@ -1,8 +1,13 @@
+<li class="span4 simple-skill">
+  <h4><%= skill.name %></h4>
+  <a class="thumbnail">
+    <% if !params[:choose].nil? %>
+        <input type="checkbox" value="<%=skill.id%>">
+    <% end %>
+    <img data-src="holder.js/160x80" src="<%= skill.picture.url(:medium) %>" alt="<%= skill.name %>">
+  </a>
 
-  <li class="span4">
-    <div class="thumbnail">
-      <img data-src="holder.js/260x180" src="<%=skill.picture.url(:medium)%>" alt="<%=skill.name%>">
-      <h3><%=skill.name%></h3>
+  <% if current_user.has_role?(:admin) %>
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           More
@@ -13,6 +18,5 @@
           <li><%= link_to 'Destroy', skill, method: :delete, data: {confirm: 'Are you sure?'} %></li>
         </ul>
       </div>
-    </div>
-  </li>
-
+  <% end %>
+</li>

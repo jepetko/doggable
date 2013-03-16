@@ -11,6 +11,7 @@ class SkillsController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @skills }
+        format.js
       end
     end
   end

@@ -64,6 +64,8 @@ describe Dog do
       @dog.skills.should include(@skill)
     end
 
+
+
   end
 
 end

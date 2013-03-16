@@ -4,7 +4,10 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :birthday %>
+    <%= f.hidden_field :skills %>
   </div>
+
+  <a href="javascript:void(0);" onclick="javascript:dogsView.addSkills('Skills','<%= skills_path :format=>:js, :choose=>true %>');">Add skills</a>
 
   <div class="form-actions">
     <%= f.button :submit %>

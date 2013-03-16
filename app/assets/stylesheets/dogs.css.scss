@@ -11,6 +11,18 @@
   padding: 5px;
 }
 
+.simple-dog tr td:nth-child(1) {
+  width:30%;
+}
+
+.simple-dog tr td:nth-child(2) {
+  width:50%;
+}
+
+.simple-dog tr td:nth-child(3) {
+  width:20%;
+}
+
 .form-actions {
   border: none;
   background: none;

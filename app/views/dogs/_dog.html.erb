@@ -20,4 +20,11 @@
       <td><%= dog.age_in_words%></td>
       <td></td>
     </tr>
+    <tr>
+      <td colspan="3">
+        <% unless dog.skills.empty? %>
+            <% render dog.skills %>
+        <% end %>
+      </td>
+    </tr>
 </table>
