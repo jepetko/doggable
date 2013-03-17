@@ -1,10 +1,6 @@
 <h1>Listing skills</h1>
 
-<% unless @skills.empty?  %>
-    <ul class="thumbnails">
-        <%= render @skills %>
-    </ul>
-<% end %>
+<%= render :partial => "skills", :object => @skills, :as => "skills" %>
 
 <br />
 

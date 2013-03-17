@@ -5,5 +5,5 @@ class DogSkillRelationship < ActiveRecord::Base
   belongs_to :skill
 
   validates :dog_id, :presence => true
-  validates :skill_id, :presence => true
+  validates :skill_id, :presence => true, :uniqueness => { :scope => :dog_id }
 end

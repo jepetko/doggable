@@ -50,7 +50,7 @@ class DogsController < ApplicationController
     if( p["birthday(1i)"] && p["birthday(2i)"] && p["birthday(3i)"] )
       dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
     end
-    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat )
+    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat, :skill_ids => p[:skill_ids] )
     if @dog.save
       flash[:notice] = "Dog created!"
       redirect_to dogs_path
@@ -64,6 +64,9 @@ class DogsController < ApplicationController
   # PUT /dogs/1.json
   def update
     @dog = Dog.find(params[:id])
+    if !params[:dog][:skill_ids].nil?
+      params[:dog][:skill_ids] = params[:dog][:skill_ids].gsub(/[\[\]]*/,"").split(",")
+    end
 
     respond_to do |format|
       if @dog.update_attributes(params[:dog])

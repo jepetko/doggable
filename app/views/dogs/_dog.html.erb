@@ -23,7 +23,7 @@
     <tr>
       <td colspan="3">
         <% unless dog.skills.empty? %>
-            <% render dog.skills %>
+            <%= render :partial => 'skills/skills', :object => dog.skills, :as => :skills %>
         <% end %>
       </td>
     </tr>

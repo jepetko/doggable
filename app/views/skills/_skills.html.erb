@@ -1,0 +1,7 @@
+<% unless skills.empty? %>
+    <ul class="thumbnails">
+      <%skills.each do |skill|%>
+          <%= render :partial => 'skills/skill', :object => skill %>
+      <%end%>
+    </ul>
+<% end %>

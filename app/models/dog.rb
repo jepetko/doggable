@@ -1,6 +1,6 @@
 class Dog < ActiveRecord::Base
   include DogsHelper
-  attr_accessible :birthday, :name
+  attr_accessible :birthday, :name, :skill_ids
   validates :user_id, :presence => true
   validates :name, :presence => true
 

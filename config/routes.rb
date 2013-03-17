@@ -1,5 +1,9 @@
 Doggable::Application.routes.draw do
-  resources :dogs, :except => [:show]
+  resources :dogs, :except => [:show] do
+    member do
+      get :skills
+    end
+  end
   resources :skills
 
   authenticated :user do

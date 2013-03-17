@@ -20,7 +20,14 @@ describe SkillsController do
 
   describe "POST 'create'" do
     before(:each) do
-      @valid_attr = {:name => 'barking', :picture => '/images/medium/missing.png'}
+
+      file = File.open("/tmp/temp.jpg","a+")
+      file.close
+      picture = ActionDispatch::Http::UploadedFile.new( :content_type => "image/jpg",
+                                                        :original_filename => "original.jpg",
+                                                        :tempfile => file )
+
+      @valid_attr = {:name => 'barking', :picture => nil}   #TODO: uploads are tested in requests
       @invalid_attr = {:name => nil}
     end
 
