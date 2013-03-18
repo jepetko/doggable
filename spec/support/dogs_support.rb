@@ -9,9 +9,10 @@ module DogGenerateHelper
 
   def associate_skills(dog,count)
     count.times do |n|
-      dog.skills.build( :name => "Skill-#{n}" )
-      dog.save!
+      skill = Skill.new(:name => "Skill-#{n}")
+      dog.skills << skill
     end
+    dog.save!
   end
 
 end
