@@ -693,3 +693,22 @@ REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"✓", "user"=>{"email"=>"", 
 REQUESTING PAGE: GET users/sign_in with {} and HTTP headers {}
 REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"✓", "user"=>{"email"=>"example@example.com", "password"=>"please", "remember_me"=>"0"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"users/sign_in"}
 REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/users/sign_in"}
+REQUESTING PAGE: GET /dogs/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /dogs/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /dogs/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /dogs/new/javascript:void(0); with {} and HTTP headers {"HTTP_REFERER"=>"/dogs/new"}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"May", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: GET http://www.example.com/dogs with {} and HTTP headers {"HTTP_REFERER"=>"/dogs"}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: GET http://www.example.com/dogs with {} and HTTP headers {"HTTP_REFERER"=>"/dogs"}
+REQUESTING PAGE: POST /dogs with {"utf8"=>"✓", "dog"=>{"name"=>"Bello", "birthday(1i)"=>"2007", "birthday(2i)"=>"5", "birthday(3i)"=>"9", "skill_ids"=>"[]"}, "commit"=>"Create Dog"} and HTTP headers {}
+REQUESTING PAGE: GET http://www.example.com/dogs with {} and HTTP headers {"HTTP_REFERER"=>"/dogs"}

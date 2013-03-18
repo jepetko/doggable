@@ -7,6 +7,13 @@ module DogGenerateHelper
     end
   end
 
+  def associate_skills(dog,count)
+    count.times do |n|
+      dog.skills.build( :name => "Skill-#{n}" )
+      dog.save!
+    end
+  end
+
 end
 
 RSpec.configure do |config|

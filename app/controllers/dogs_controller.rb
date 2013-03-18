@@ -50,7 +50,7 @@ class DogsController < ApplicationController
     if( p["birthday(1i)"] && p["birthday(2i)"] && p["birthday(3i)"] )
       dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
     end
-    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat, :skill_ids => p[:skill_ids] )
+    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat, :skill_ids => parse_skills(p[:skill_ids]) )
     if @dog.save
       flash[:notice] = "Dog created!"
       redirect_to dogs_path
@@ -65,7 +65,7 @@ class DogsController < ApplicationController
   def update
     @dog = Dog.find(params[:id])
     if !params[:dog][:skill_ids].nil?
-      params[:dog][:skill_ids] = params[:dog][:skill_ids].gsub(/[\[\]]*/,"").split(",")
+      params[:dog][:skill_ids] = parse_skills(p[:dog][:skill_ids])
     end
 
     respond_to do |format|
@@ -89,5 +89,12 @@ class DogsController < ApplicationController
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def parse_skills(skills)
+    if skills.nil?
+      nil
+    end
+    skills.gsub(/[\[\]]*/,"").split(",")
   end
 end
