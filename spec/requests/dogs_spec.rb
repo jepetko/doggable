@@ -6,7 +6,7 @@ describe "Dogs Requests" do
     @user = FactoryGirl.create(:user)
     sign_in_as_a_valid_user @user
 
-    generate_dogs(@user,5)
+    @dogs = generate_dogs(@user,5)
   end
 
   describe "GET /dogs" do
@@ -47,6 +47,47 @@ describe "Dogs Requests" do
         click_button
         response.should have_selector("#flash_notice", :content => "created")
       }.should change(Dog, :count).by(1)
+    end
+
+    it "should be failure if the name is empty" do
+      lambda {
+        get "dogs/new"
+        click_button
+        response.should have_selector("#flash_error", :content => "created")
+      }.should_not change(Dog,:count)
+    end
+  end
+
+  describe "GET /dogs/N" do
+    it "should not be successful because single dogs cannot be displayed" do
+      get "dogs/#{@dogs.last.id}"
+      response.should redirect_to(dogs_path)
+    end
+  end
+
+  describe "GET /dogs/N/edit" do
+    it "should be successful" do
+      get "dogs/#{@dogs.last.id}/edit"
+      response.should have_selector("input#dog_name", :value => "#{@dogs.last.name}")
+    end
+  end
+
+  describe "PUT /dogs/N" do
+    it "should be successful" do
+      get "dogs/#{@dogs.last.id}/edit"
+      fill_in :dog_name, :with => "My first dog"
+      click_button
+      response.should have_selector("#flash_notice", :content => "updated")
+
+      get "dogs"
+      response.should have_selector(".simple-dog", :content => "My first dog")
+    end
+
+    it "should be failure if the dog's name is empty" do
+      get "dogs/#{@dogs.last.id}/edit"
+      fill_in :dog_name, :with => ""
+      click_button
+      response.should have_selector(".alert-error", :content => "problems")
     end
   end
 

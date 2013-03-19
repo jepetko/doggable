@@ -5,6 +5,7 @@ module DogGenerateHelper
       user.dogs.build( :name => "Dog-#{n}" )
       user.save!
     end
+    user.dogs
   end
 
   def associate_skills(dog,count)
@@ -13,6 +14,7 @@ module DogGenerateHelper
       dog.skills << skill
     end
     dog.save!
+    dog.skills
   end
 
 end

@@ -18,12 +18,7 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
-    @dog = Dog.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @dog }
-    end
+    redirect_to dogs_path
   end
 
   # GET /dogs/new
@@ -64,9 +59,12 @@ class DogsController < ApplicationController
   # PUT /dogs/1.json
   def update
     @dog = Dog.find(params[:id])
-    if !params[:dog][:skill_ids].nil?
-      params[:dog][:skill_ids] = parse_skills(p[:dog][:skill_ids])
-    end
+    #if params[:dog][:skill_ids].nil?
+    #  params[:dog][:skill_ids] = []
+    #else
+    #  params[:dog][:skill_ids] = parse_skills(params[:dog][:skill_ids])
+    #end if
+    params[:dog][:skill_ids] = parse_skills(params[:dog][:skill_ids])
 
     respond_to do |format|
       if @dog.update_attributes(params[:dog])
@@ -93,8 +91,10 @@ class DogsController < ApplicationController
 
   def parse_skills(skills)
     if skills.nil?
-      nil
+      return nil
     end
-    skills.gsub(/[\[\]]*/,"").split(",")
+    skills = skills.gsub(/[\[\]]*/,"")
+    return skills.split(",") if skills.length>0
+    []
   end
 end

@@ -1,5 +1,5 @@
 Doggable::Application.routes.draw do
-  resources :dogs, :except => [:show] do
+  resources :dogs do #, :except => [:show] do
     member do
       get :skills
     end
