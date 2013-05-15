@@ -5,6 +5,8 @@
     <title><%= content_for?(:title) ? yield(:title) : "Doggable" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Doggable" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag get_current_css, :media => "all" %>
+
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>

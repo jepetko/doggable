@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
   include DogsHelper
+  include SkinHelper
+
   # GET /dogs
   # GET /dogs.json
   def index

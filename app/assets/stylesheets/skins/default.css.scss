@@ -1,0 +1,8 @@
+@import "bootstrap";
+body { padding-top: 85px; }
+@import "bootstrap-responsive";
+
+.thumbnail > img {
+  width: 260px;
+  height: 180px;
+}

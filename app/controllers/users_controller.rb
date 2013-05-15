@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include SkinHelper
+
   before_filter :authenticate_user!
 
   def index

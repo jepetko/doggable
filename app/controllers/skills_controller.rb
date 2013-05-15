@@ -1,4 +1,5 @@
 class SkillsController < ApplicationController
+  include SkinHelper
 
   # GET /skills
   # GET /skills.json
