@@ -1,4 +1,4 @@
-$linkColor: #338800;
+/*$linkColor: #338800;
 $btnPrimaryBackground: #338800; //#FF6600;
 $dropdownLinkBackgroundHover: #338800; //#FF9933;
 $navbarHeight: 85px;
@@ -9,6 +9,7 @@ $navbarText: #000;
 $navbarLinkColor: #000;
 $navbarBrandColor: #000;
 $bodyBackground: #338800 !important; //#88ee88 !important;
+  */
 
 @import "bootstrap";
 body { padding-top: 85px; }
@@ -20,7 +21,7 @@ body { padding-top: 85px; }
 }
 
 
-
+  /*
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
   background-image: url('/assets/logo_2_trans.png') !important;
   background-position: bottom left !important;
@@ -48,7 +49,7 @@ body { padding-top: 85px; }
 .content {
   background-color: #fff;
   padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  margin: 0 -20px; //negative indent the amount of the padding to maintain the grid system
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
@@ -59,4 +60,4 @@ body { padding-top: 85px; }
 
 .well {
   background-color: #eaffcc;
-}
+}              */

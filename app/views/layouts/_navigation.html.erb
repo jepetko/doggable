@@ -1,31 +1,33 @@
-<!--<%= link_to "Doggable", root_path, :class => 'brand' %> -->
-<ul class="nav">
+<ul id="navigation">
+  <li class="menu-home">
+    <%= link_to "Doggable", root_path %>
+  </li>
   <% if user_signed_in? %>
-    <li>
+    <li class="menu-logout">
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
     </li>
   <% else %>
-    <li>
+    <li class="menu-login">
     <%= link_to 'Login', new_user_session_path %>  
     </li>
   <% end %>
   <% if user_signed_in? %>
-    <li>
+    <li class="menu-edit-account">
     <%= link_to 'Edit account', edit_user_registration_path %>
     </li>
     <% if current_user.has_role? :admin %>
-      <li>
+      <li class="menu-admin">
         <%= link_to 'Admin', users_path %>
       </li>
-      <li>
+      <li class="menu-skill">
         <%= link_to 'Skill', skills_path %>
       </li>
     <% end %>
-      <li>
+      <li class="menu-dog">
         <%= link_to 'Your dog', dogs_path %>
       </li>
   <% else %>
-    <li>
+    <li class="menu-sign-up">
     <%= link_to 'Sign up', new_user_registration_path %>
     </li>
   <% end %>

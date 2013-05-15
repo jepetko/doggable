@@ -57,3 +57,33 @@ var dogsView = (function(commons) {
         }
     }
 })(commons);
+
+/////////////////////////////////
+/// navigation
+
+$(function() {
+    var d=300;
+    $('#navigation a').each(function(){
+        var paddingTop = $(this).css('paddingTop');
+        /*$(this).stop().animate({
+            'marginTop':'-' + paddingTop
+        },d+=150);
+        */
+        $(this).css('margin-top', '-' + paddingTop);
+    });
+
+    $('#navigation > li').hover(
+        function () {
+            $('a',$(this)).stop().animate({
+                'marginTop':'-2px'
+            },200);
+        },
+        function () {
+            var $t = $('a',$(this));
+            var paddingTop = $t.css('paddingTop');
+            $('a',$(this)).stop().animate({
+                'marginTop': '-' + paddingTop
+            },200);
+        }
+    );
+});
