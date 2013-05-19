@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227215035) do
+ActiveRecord::Schema.define(:version => 20130519194421) do
 
   create_table "dog_skill_relationships", :force => true do |t|
     t.integer  "dog_id"
@@ -23,9 +23,14 @@ ActiveRecord::Schema.define(:version => 20130227215035) do
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.date     "birthday"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.string   "sex",                  :limit => 1
   end
 
   create_table "roles", :force => true do |t|

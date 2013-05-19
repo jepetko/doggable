@@ -1,0 +1,5 @@
+<%unless dogs.empty?%>
+    <%dogs.each do |dog|%>
+        <%= render :partial => 'dogs/dog_recent', :object => dog, :as => :dog %>
+    <%end%>
+<%end%>

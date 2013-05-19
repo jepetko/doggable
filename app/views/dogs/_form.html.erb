@@ -1,9 +1,16 @@
-<%= simple_form_for(@dog) do |f| %>
+<%= simple_form_for(@dog, :html => {:multipart => true}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :birthday %>
+    <%= f.input :sex, as: :radio, :collection => [['female', :f], ['male', :m]] %>
+    <%= f.label :birthday %>
+    <%= f.text_field :birthday %>
+    <%= f.label :picture %>
+
+    <%= f.file_field :picture, :class => :hidden %>
+    <input type="button" id="dog_picture_trigger" class="btn btn-primary" value="Upload photo">
+    <span <%=(@dog.picture.nil? || @dog.picture.url.include?('missing')) ? '' : ' class=icon-ok'%>></span>
     <%= f.hidden_field :skill_ids %>
   </div>
 

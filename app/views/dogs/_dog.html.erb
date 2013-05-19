@@ -22,6 +22,14 @@
           <td></td>
         </tr>
         <tr>
+          <td>Foto:</td>
+          <td>
+            <a class="thumbnail">
+              <img src="<%= dog.picture.url(:medium) %>" alt="<%= dog.name %>">
+            </a>
+          </td>
+        </tr>
+        <tr>
           <td colspan="3">
             <% unless dog.skills.empty? %>
                 <%= render :partial => 'skills/skills', :object => dog.skills, :as => :skills %>

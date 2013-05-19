@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
@@ -87,3 +88,18 @@ $(function() {
         }
     );
 });
+
+////////////////////////////////////// for dogs form
+
+$(function() {
+    $("#dog_birthday").datepicker();
+});
+
+$(function() {
+    $("#dog_picture").bind('change', function() {
+
+    })
+    $("#dog_picture_trigger").bind('click', function() {
+        $("#dog_picture").trigger('click');
+    })
+})
