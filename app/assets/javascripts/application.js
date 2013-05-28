@@ -62,14 +62,11 @@ var dogsView = (function(commons) {
 /////////////////////////////////
 /// navigation
 
+/*
 $(function() {
     var d=300;
     $('#navigation a').each(function(){
         var paddingTop = $(this).css('paddingTop');
-        /*$(this).stop().animate({
-            'marginTop':'-' + paddingTop
-        },d+=150);
-        */
         $(this).css('margin-top', '-' + paddingTop);
     });
 
@@ -87,6 +84,25 @@ $(function() {
             },200);
         }
     );
+});
+*/
+
+//TODO: modernizer; use prefixed function
+$(function() {
+    $('.plate').bind("click", function() {
+        $(this).addClass('fall');
+        $(this).bind("animationend", function(){
+            var evt = arguments[0];
+            var orig = evt.originalEvent;
+            if( orig.animationName == "anim") {
+                $(this).css("transform", "rotateX(0deg)");
+            } else if( orig.animationName == "anim2") {
+                $(this).css("transform", "rotateX(-30deg)");
+            } else if( orig.animationName == "anim3" ) {
+                $(this).css("transform", "rotateX(0deg)");
+            }
+        });
+    });
 });
 
 ////////////////////////////////////// for dogs form
