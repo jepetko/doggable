@@ -1,5 +1,22 @@
 $full: 100%;
 
+@mixin vendor-prefix($name, $value) {
+  #{$name}: #{$value};
+  -webkit-#{$name}: #{$value};
+  -ms-#{$name}: #{$value};
+  -moz-#{$name}: #{$value};
+  -o-#{$name}: #{$value};
+}
+
+@mixin keyframes($name) {
+  @-moz-keyframes #{$name} { @content; }
+  @-webkit-keyframes #{$name} { @content; }
+  @-o-keyframes #{$name} { @content; }
+  @-ms-keyframes #{$name} { @content; }
+  @-khtml-keyframes #{$name} { @content; }
+  @keyframes #{$name} { @content; }
+}
+
 header.main_header {
   width: $full;
   height: 240px;
@@ -38,23 +55,26 @@ header.main_header {
     background-image: url(/assets/plate_trans.png);
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
+    @include vendor-prefix(transform, rotateX(180deg));
   }
 }
 
 .fall {
-  animation: anim  3s, anim2 1s, anim3 1s, anim2 1s, anim3 1s;
-  -webkit-animation: anim  3s, anim2 1s, anim3 1s, anim2 1s, anim3 1s;
-
-  animation-delay: 0s, 3s, 4s, 5s, 6s;
-  -webkit-animation-delay: 0s, 3s, 4s, 5s, 6s;
-
-  animation-timing-function: ease-start;
-  -webkit-animation-timing-function: ease-start;
+  @include vendor-prefix(animation, "anim 3s, anim2 1s, anim3 1s, anim2 1s, anim3 1s");
+  @include vendor-prefix(animation-delay, "0s, 3s, 4s, 5s, 6s");
+  @include vendor-prefix(animation-timing-function, ease-start);
 }
 
+@include keyframes(anim) {
+  from {
+    @include vendor-prefix(transform, rotateX(180deg));
+  }
+  to {
+    @include vendor-prefix(transform, rotateX(0deg) translate(0px,200px));
+  };
+}
 
+/*
 @keyframes anim
 {
   from {
@@ -62,8 +82,8 @@ header.main_header {
     -webkit-transform: rotateX(180deg);
   }
   to {
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg) translate(0px,200px);
+    -webkit-transform: rotateX(0deg) translate(0px,200px);
   }
 }
 
@@ -78,6 +98,7 @@ header.main_header {
     -webkit-transform: rotateX(0deg);
   }
 }
+*/
 
 @keyframes anim2
 {
@@ -85,6 +106,7 @@ header.main_header {
     transform:rotateX(0deg);
     -webkit-transform:rotateX(0deg);
   }
+
   to {
     transform: rotateX(-30deg);
     -webkit-transform: rotateX(-30deg);

@@ -60,6 +60,26 @@ var dogsView = (function(commons) {
 })(commons);
 
 /////////////////////////////////
+/// for modernizr
+
+
+var crossBrowserEvtNames = {
+    //transition
+    'WebkitTransition' : 'webkitTransitionEnd',
+    'MozTransition'    : 'transitionend',
+    'OTransition'      : 'oTransitionEnd',
+    'msTransition'     : 'MSTransitionEnd',
+    'transition'       : 'transitionend',
+    //animation
+    'WebkitAnimation' : 'webkitAnimationEnd',
+    'MozAnimation'    : 'animationend',
+    'OAnimation'      : 'oAnimationEnd',
+    'msAnimation'     : 'MSAnimationEnd',
+    'animation'       : 'animationend'
+    };
+
+
+/////////////////////////////////
 /// navigation
 
 /*
@@ -91,14 +111,20 @@ $(function() {
 $(function() {
     $('.plate').bind("click", function() {
         $(this).addClass('fall');
-        $(this).bind("animationend", function(){
+
+        var evtName = crossBrowserEvtNames[ Modernizr.prefixed('animation') ];
+        $(this).bind(evtName, function(){
             var evt = arguments[0];
             var orig = evt.originalEvent;
+            console.log(orig);
             if( orig.animationName == "anim") {
+                console.log(1);
                 $(this).css("transform", "rotateX(0deg)");
             } else if( orig.animationName == "anim2") {
+                console.log(2);
                 $(this).css("transform", "rotateX(-30deg)");
             } else if( orig.animationName == "anim3" ) {
+                console.log(3);
                 $(this).css("transform", "rotateX(0deg)");
             }
         });
