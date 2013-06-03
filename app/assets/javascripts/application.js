@@ -138,7 +138,7 @@ $(function() {
     (new function() {
 
         var startRot = '180deg', trans = '50px', endRot = '-100deg', startDelay = 1000,
-            afterRotateIdx = 0,
+            afterRotateIdx = 0, animstartDelay = 1000,
             flappingDegrees = [100,80,70,60,50,40,30,20,10,5,0], flappingDelays = [startDelay];
 
         this.getPlate = function() {
@@ -174,7 +174,7 @@ $(function() {
                     switch(name) {
                         case 'animstart':
                             plate.css("transform", "rotateX(" + endRot + ") translate(0px," + trans + ")");
-                            this.afterRotate();
+                            //this.afterRotate();
                             break;
                         default:
                             var postfix = parseInt(/\d+$/.exec(name)[0]);
@@ -187,13 +187,12 @@ $(function() {
             },this));
         }
         this.doRotate = function() {
-            this.getPlate().css( Modernizr.prefixed('animation'), 'animstart 3s');
+            //this.getPlate().css( Modernizr.prefixed('animation'), 'animstart 1s');
         }
         this.afterRotate = function() {
             var anim = '', animDelay = '';
-            var tmpAnim = 0;
+            var tmpAnim = animstartDelay;
             $.each(flappingDelays, function(idx,val) {
-                tmpAnim += val;
                 if( anim!='' ) {
                     anim += ', ';
                     animDelay += ', ';
@@ -201,8 +200,11 @@ $(function() {
                 anim += 'plate' + idx + ' ' + val + 'ms';
                 animDelay += tmpAnim;
                 animDelay += 'ms';
+                tmpAnim += val;
             });
             var plate = this.getPlate();
+            anim = 'animstart ' + animstartDelay + 'ms,' + anim;
+            animDelay = '0ms,' + animDelay;
             console.log( anim );
             console.log( animDelay );
             var animKeyword = Modernizr.prefixed('animation');
@@ -211,7 +213,8 @@ $(function() {
             plate.css( animKeyword + '-timing-function', 'ease-start');
         }
         this.start = function() {
-            this.doRotate();
+            //this.doRotate();
+            this.afterRotate();
         }
         this.init();
     }).start();
