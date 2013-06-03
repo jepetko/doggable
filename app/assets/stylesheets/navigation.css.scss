@@ -1,21 +1,8 @@
-$full: 100%;
+@import "reuse";
 
-@mixin vendor-prefix($name, $value) {
-  #{$name}: #{$value};
-  -webkit-#{$name}: #{$value};
-  -ms-#{$name}: #{$value};
-  -moz-#{$name}: #{$value};
-  -o-#{$name}: #{$value};
-}
-
-@mixin keyframes($name) {
-  @-moz-keyframes #{$name} { @content; }
-  @-webkit-keyframes #{$name} { @content; }
-  @-o-keyframes #{$name} { @content; }
-  @-ms-keyframes #{$name} { @content; }
-  @-khtml-keyframes #{$name} { @content; }
-  @keyframes #{$name} { @content; }
-}
+$plateStartRot: 180deg;
+$plateTrans: 50px;
+$plateEndRot: -100deg;
 
 header.main_header {
   width: $full;
@@ -52,104 +39,21 @@ header.main_header {
     left: 0px;
     width: 189px;
     height:110px;
-    background-image: url(/assets/plate_trans.png);
+    background-image: url(/assets/plate_trans.svg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    @include vendor-prefix(transform, rotateX(180deg));
+    @include vendor-prefix(transform, rotateX($plateStartRot) translate(0px,$plateTrans));
   }
 }
 
-.fall {
-  @include vendor-prefix(animation, "anim 3s, anim2 1s, anim3 1s, anim2 1s, anim3 1s");
-  @include vendor-prefix(animation-delay, "0s, 3s, 4s, 5s, 6s");
-  @include vendor-prefix(animation-timing-function, ease-start);
-}
-
-@include keyframes(anim) {
+@include keyframes(animstart) {
   from {
-    @include vendor-prefix(transform, rotateX(180deg));
+    @include vendor-prefix(transform, rotateX($plateStartRot));
   }
   to {
-    @include vendor-prefix(transform, rotateX(0deg) translate(0px,200px));
+    @include vendor-prefix(transform, rotateX($plateEndRot) translate(0px,$plateTrans));
   };
 }
-
-/*
-@keyframes anim
-{
-  from {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-  to {
-    transform: rotateX(0deg) translate(0px,200px);
-    -webkit-transform: rotateX(0deg) translate(0px,200px);
-  }
-}
-
-@-webkit-keyframes anim
-{
-  from {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-  to {
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
-  }
-}
-*/
-
-@keyframes anim2
-{
-  from {
-    transform:rotateX(0deg);
-    -webkit-transform:rotateX(0deg);
-  }
-
-  to {
-    transform: rotateX(-30deg);
-    -webkit-transform: rotateX(-30deg);
-  }
-}
-
-@-webkit-keyframes anim2
-{
-  from {
-    transform:rotateX(0deg);
-    -webkit-transform:rotateX(0deg);
-  }
-  to {
-    transform: rotateX(-30deg);
-    -webkit-transform: rotateX(-30deg);
-  }
-}
-
-
-@keyframes anim3
-{
-  from {
-    transform: rotateX(-30deg);
-    -webkit-transform: rotateX(-30deg);
-  }
-  to {
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
-  }
-}
-
-@-webkit-keyframes anim3
-{
-  from {
-    transform: rotateX(-30deg);
-    -webkit-transform: rotateX(-30deg);
-  }
-  to {
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
-  }
-}
-
 
 /*
 ul#navigation {

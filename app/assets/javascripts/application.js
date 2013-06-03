@@ -107,28 +107,114 @@ $(function() {
 });
 */
 
-//TODO: modernizer; use prefixed function
-$(function() {
-    $('.plate').bind("click", function() {
-        $(this).addClass('fall');
+function CssUtils() {}
+CssUtils.addRule = function(rule) {
+    if( document.styleSheets && document.styleSheets.length ) {
+        document.styleSheets[0].insertRule( rule, 0 );
+    } else {
+        var s = document.createElement( 'style' );
+        s.innerHTML = rule;
+        document.getElementsByTagName( 'head' )[ 0 ].appendChild( s );
+    }
+}
+CssUtils.getPrefix = function(str) {
+    var result = /.*\-/g.exec(str);
+    if( result && result.length>0 ) return result[0];
+    return '';
+}
+CssUtils.fromCamelToCss = function(str) {
+    return str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); });
+}
 
-        var evtName = crossBrowserEvtNames[ Modernizr.prefixed('animation') ];
-        $(this).bind(evtName, function(){
-            var evt = arguments[0];
-            var orig = evt.originalEvent;
-            console.log(orig);
-            if( orig.animationName == "anim") {
-                console.log(1);
-                $(this).css("transform", "rotateX(0deg)");
-            } else if( orig.animationName == "anim2") {
-                console.log(2);
-                $(this).css("transform", "rotateX(-30deg)");
-            } else if( orig.animationName == "anim3" ) {
-                console.log(3);
-                $(this).css("transform", "rotateX(0deg)");
+if( typeof Array.prototype.last !== 'function' ) {
+    Array.prototype.last = function() {
+        if( this.length == 0 ) return null;
+        return this[this.length-1];
+    }
+}
+
+
+$(function() {
+    (new function() {
+
+        var startRot = '180deg', trans = '50px', endRot = '-100deg', startDelay = 1000,
+            afterRotateIdx = 0,
+            flappingDegrees = [100,80,70,60,50,40,30,20,10,5,0], flappingDelays = [startDelay];
+
+        this.getPlate = function() {
+            return $('.plate');
+        }
+        this.initVars = function() {
+            var transform = Modernizr.prefixed('transform');
+            var transformCss = CssUtils.fromCamelToCss(transform);
+            var keyFrame = '@' + CssUtils.getPrefix(transformCss) + 'keyframes';  //issue modernizr
+
+            for(var i=0;i<flappingDegrees.length-1;i++) {
+                var f = (i%2===0)?-1:1;
+                var from = flappingDegrees[i] * f;
+                var to = flappingDegrees[i+1] * f * (-1);
+                var rule = keyFrame + ' plate' + i + ' { '+
+                            ' from {' + CssUtils.fromCamelToCss(transform) + ':rotateX( ' + from + 'deg ) translate(0px,' + trans + ')}'+
+                            ' to {' + CssUtils.fromCamelToCss(transform) + ':rotateX( ' + to + 'deg ) translate(0px,' + trans + ') }'+
+                            '}';
+                console.log(rule);
+                CssUtils.addRule(rule);
+                flappingDelays.push( Math.round(flappingDelays.last() * .75) );
             }
-        });
-    });
+        }
+
+        this.init = function() {
+            this.initVars();
+            var evtName = crossBrowserEvtNames[ Modernizr.prefixed('animation') ];
+            this.getPlate().bind(evtName, $.proxy( function(evt) {
+                var plate = this.getPlate();
+                var orig = evt.originalEvent;
+                if( orig ) {
+                    var name = orig.animationName;
+                    switch(name) {
+                        case 'animstart':
+                            plate.css("transform", "rotateX(" + endRot + ") translate(0px," + trans + ")");
+                            this.afterRotate();
+                            break;
+                        default:
+                            var postfix = parseInt(/\d+$/.exec(name)[0]);
+                            var f = (postfix%2==0) ? -1 : 1;
+                            var endValue = flappingDegrees[postfix+1] * f;
+                            console.log( "rotateX(" + endValue + "deg) translate(0px," + trans + ")" );
+                            plate.css("transform", "rotateX(" + endValue + "deg) translate(0px," + trans + ")");
+                    }
+                }
+            },this));
+        }
+        this.doRotate = function() {
+            this.getPlate().css( Modernizr.prefixed('animation'), 'animstart 3s');
+        }
+        this.afterRotate = function() {
+            var anim = '', animDelay = '';
+            var tmpAnim = 0;
+            $.each(flappingDelays, function(idx,val) {
+                tmpAnim += val;
+                if( anim!='' ) {
+                    anim += ', ';
+                    animDelay += ', ';
+                }
+                anim += 'plate' + idx + ' ' + val + 'ms';
+                animDelay += tmpAnim;
+                animDelay += 'ms';
+            });
+            var plate = this.getPlate();
+            console.log( anim );
+            console.log( animDelay );
+            var animKeyword = Modernizr.prefixed('animation');
+            plate.css( animKeyword, anim);
+            plate.css( animKeyword + '-delay', animDelay);
+            plate.css( animKeyword + '-timing-function', 'ease-start');
+        }
+        this.start = function() {
+            this.doRotate();
+        }
+        this.init();
+    }).start();
 });
 
 ////////////////////////////////////// for dogs form
