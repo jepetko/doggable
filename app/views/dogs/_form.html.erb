@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :sex, as: :radio, :collection => [['female', :f], ['male', :m]] %>
+    <%= f.input :sex, as: :radio_buttons, :collection => [['female', :f], ['male', :m]] %>
     <%= f.label :birthday %>
     <%= f.text_field :birthday %>
     <%= f.label :picture %>
