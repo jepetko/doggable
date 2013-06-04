@@ -2,7 +2,7 @@ module DogGenerateHelper
 
   def generate_dogs(user,count)
     count.times do |n|
-      user.dogs.build( :name => "Dog-#{n}" )
+      user.dogs.build( :name => "Dog-#{n}", :sex => "f" )
       user.save!
     end
     user.dogs

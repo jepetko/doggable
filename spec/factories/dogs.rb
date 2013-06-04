@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :dog do
     name "MyString"
     birthday "2012-12-08"
+    sex "m"
   end
 end

@@ -1,13 +1,12 @@
 @import "reuse";
 
 $plateStartRot: 180deg;
-$plateTrans: 50px;
-$plateEndRot: -100deg;
+$plateTrans: 10px;
 
 header.main_header {
   width: $full;
   height: 240px;
-  background: url(/assets/sidewalk_right.png) right top no-repeat, url(/assets/sidewalk_bg.png) -2px top repeat-x;
+  /*background: url(/assets/sidewalk_right.png) right top no-repeat, url(/assets/sidewalk_bg.png) -2px top repeat-x;*/
 
   nav {
     width: $full;
@@ -43,16 +42,23 @@ header.main_header {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     text-align:center;
+    /* initial position of the plate is upside down*/
     @include vendor-prefix(transform, rotateX($plateStartRot) translate(0px,$plateTrans));
   }
 
   div.plate span {
-    margin-bottom: 0;
+    position: absolute;
+    font-family: 'Akronim';
+    font-size: 24px;
+    bottom: 20%;
+    left: 50%;
     font-weight: bold;
     color: white;
   }
 }
 
+/*Example howto keyframes with sass functions*/
+/*
 @include keyframes(animstart) {
   from {
     @include vendor-prefix(transform, rotateX($plateStartRot));
@@ -61,6 +67,7 @@ header.main_header {
     @include vendor-prefix(transform, rotateX($plateEndRot) translate(0px,$plateTrans));
   };
 }
+*/
 
 /*
 ul#navigation {

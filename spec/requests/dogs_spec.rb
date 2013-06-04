@@ -28,9 +28,7 @@ describe "Dogs Requests" do
       get dogs_path
       click_link 'Add your dog'
       response.should have_selector("input#dog_name")
-      response.should have_selector("select#dog_birthday_1i")
-      response.should have_selector("select#dog_birthday_2i")
-      response.should have_selector("select#dog_birthday_3i")
+      response.should have_selector("input#dog_birthday")
 
       response.should have_selector("a", :content => "Add skills" )
     end
@@ -41,9 +39,8 @@ describe "Dogs Requests" do
       lambda {
         get "dogs/new"
         fill_in :dog_name, :with => "Bello"
-        fill_in :dog_birthday_1i, :with => 2007
-        fill_in :dog_birthday_2i, :with => 05
-        fill_in :dog_birthday_3i, :with => 9
+        fill_in :dog_birthday, :with => "09.05.2007"
+        choose :dog_sex_m
         click_button
         response.should have_selector("#flash_notice", :content => "created")
       }.should change(Dog, :count).by(1)

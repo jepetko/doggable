@@ -3,12 +3,16 @@ $btnPrimaryBackground: #EE191F;
 $dropdownLinkBackgroundHover: #EE191F;
 $bodyBackground: #FFFFFF !important;
 
+$sansFontFamily: 'Quicksand';
+$serifFontFamily: 'Quicksand', serif;
+$monoFontFamily: 'Ubuntu Mono';
+
 @import "bootstrap";
 @import "bootstrap-responsive";
 
 #main {
-  background-image: url(/assets/gradient.png);
-  background-repeat: repeat-x;
+  /*background-image: url(/assets/gradient.png);
+  background-repeat: repeat-x;   */
 }
 
 .thumbnail > img {
@@ -32,9 +36,9 @@ $bodyBackground: #FFFFFF !important;
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
-  /*-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);   */
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
 .well {

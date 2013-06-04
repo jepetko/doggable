@@ -41,11 +41,11 @@ class DogsController < ApplicationController
   # POST /dogs.json
   def create
     p = params[:dog]
-    dat = nil
-    if( p["birthday(1i)"] && p["birthday(2i)"] && p["birthday(3i)"] )
-      dat = Date::civil(p["birthday(1i)"].to_i, p["birthday(2i)"].to_i, p["birthday(3i)"].to_i)
-    end
-    @dog = current_user.dogs.build( :name => p[:name], :birthday => dat, :skill_ids => parse_skills(p[:skill_ids]) )
+    b = p[:birthday]
+    @dog = current_user.dogs.build( :name => p[:name],
+                                    :birthday => parse_birthday(b),
+                                    :sex => p[:sex],
+                                    :skill_ids => parse_skills(p[:skill_ids]) )
     if @dog.save
       flash[:notice] = "Dog created!"
       redirect_to dogs_path
@@ -59,15 +59,14 @@ class DogsController < ApplicationController
   # PUT /dogs/1.json
   def update
     @dog = Dog.find(params[:id])
-    #if params[:dog][:skill_ids].nil?
-    #  params[:dog][:skill_ids] = []
-    #else
-    #  params[:dog][:skill_ids] = parse_skills(params[:dog][:skill_ids])
-    #end if
-    params[:dog][:skill_ids] = parse_skills(params[:dog][:skill_ids])
+
+    dog = params[:dog]
+    dog[:skill_ids] = parse_skills(dog[:skill_ids])
+    dog[:birthday] = parse_birthday(dog[:birthday])
+    dog[:picture] = parse_picture(dog[:picture])
 
     respond_to do |format|
-      if @dog.update_attributes(params[:dog])
+      if @dog.update_attributes(dog)
         format.html { redirect_to dogs_path, notice: 'Dog was successfully updated.' }
         format.json { head :no_content }
       else
@@ -96,5 +95,13 @@ class DogsController < ApplicationController
     skills = skills.gsub(/[\[\]]*/,"")
     return skills.split(",") if skills.length>0
     []
+  end
+
+  def parse_birthday(b)
+    return (b.nil? || b.empty?) ? nil : Date.parse(b)
+  end
+
+  def parse_picture(p)
+    return (p.nil? || p.empty?) ? nil : p;
   end
 end

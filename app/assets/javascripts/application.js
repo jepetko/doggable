@@ -80,6 +80,13 @@ var crossBrowserEvtNames = {
 
 
 /////////////////////////////////
+/// for fonts
+
+WebFontConfig = {
+    google: { families: [ 'Quicksand', 'Akronim', 'Ubuntu Mono' ] }
+};
+
+/////////////////////////////////
 /// navigation
 
 /*
@@ -136,10 +143,11 @@ if( typeof Array.prototype.last !== 'function' ) {
 
 $(function() {
     (new function() {
-
-        var startRot = '180deg', trans = '50px', endRot = '-100deg', startDelay = 1000,
-            afterRotateIdx = 0, animstartDelay = 1000,
-            flappingDegrees = [100,80,70,60,50,40,30,20,10,5,0], flappingDelays = [startDelay];
+        var startDelay = 1000,
+            animstartDelay = 1000,
+            flappingDegrees = [100,80,70,60,50,40,30,20,10,5,0],
+            flappingDelays = [startDelay], //Note: flappingDelays will be filled later
+            mainFrom = '180deg', trans = '10px', mainTo = flappingDegrees[0]*(-1);
 
         this.getPlate = function() {
             return $('.plate');
@@ -149,13 +157,19 @@ $(function() {
             var transformCss = CssUtils.fromCamelToCss(transform);
             var keyFrame = '@' + CssUtils.getPrefix(transformCss) + 'keyframes';  //issue modernizr
 
+            var mainRule = keyFrame + ' animstart {' +
+                            ' from {' + transformCss + ':rotateX( ' + mainFrom + 'deg ) translate(0px,' + trans + ')}'+
+                            ' to {' + transformCss + ':rotateX( ' + mainTo + 'deg ) translate(0px,' + trans + ') }'+
+                            '}';
+            CssUtils.addRule(mainRule);
+
             for(var i=0;i<flappingDegrees.length-1;i++) {
                 var f = (i%2===0)?-1:1;
                 var from = flappingDegrees[i] * f;
                 var to = flappingDegrees[i+1] * f * (-1);
                 var rule = keyFrame + ' plate' + i + ' { '+
-                            ' from {' + CssUtils.fromCamelToCss(transform) + ':rotateX( ' + from + 'deg ) translate(0px,' + trans + ')}'+
-                            ' to {' + CssUtils.fromCamelToCss(transform) + ':rotateX( ' + to + 'deg ) translate(0px,' + trans + ') }'+
+                            ' from {' + transformCss + ':rotateX( ' + from + 'deg ) translate(0px,' + trans + ')}'+
+                            ' to {' + transformCss + ':rotateX( ' + to + 'deg ) translate(0px,' + trans + ') }'+
                             '}';
                 console.log(rule);
                 CssUtils.addRule(rule);
@@ -173,12 +187,11 @@ $(function() {
                     var name = orig.animationName;
                     switch(name) {
                         case 'animstart':
-                            plate.css("transform", "rotateX(" + endRot + ") translate(0px," + trans + ")");
-                            //this.afterRotate();
+                            plate.css("transform", "rotateX(" + mainTo + ") translate(0px," + trans + ")");
                             break;
                         default:
                             var postfix = parseInt(/\d+$/.exec(name)[0]);
-                            var f = (postfix%2==0) ? -1 : 1;
+                            var f = (postfix%2==0) ? 1 : -1;
                             var endValue = flappingDegrees[postfix+1] * f;
                             console.log( "rotateX(" + endValue + "deg) translate(0px," + trans + ")" );
                             plate.css("transform", "rotateX(" + endValue + "deg) translate(0px," + trans + ")");
@@ -187,9 +200,6 @@ $(function() {
             },this));
         }
         this.doRotate = function() {
-            //this.getPlate().css( Modernizr.prefixed('animation'), 'animstart 1s');
-        }
-        this.afterRotate = function() {
             var anim = '', animDelay = '';
             var tmpAnim = animstartDelay;
             $.each(flappingDelays, function(idx,val) {
@@ -205,16 +215,15 @@ $(function() {
             var plate = this.getPlate();
             anim = 'animstart ' + animstartDelay + 'ms,' + anim;
             animDelay = '0ms,' + animDelay;
+            var animKeyword = Modernizr.prefixed('animation');
             console.log( anim );
             console.log( animDelay );
-            var animKeyword = Modernizr.prefixed('animation');
             plate.css( animKeyword, anim);
             plate.css( animKeyword + '-delay', animDelay);
             plate.css( animKeyword + '-timing-function', 'ease-start');
         }
         this.start = function() {
-            //this.doRotate();
-            this.afterRotate();
+            this.doRotate();
         }
         this.init();
     }).start();

@@ -10,6 +10,7 @@ group :assets do
   gem 'jquery-ui-sass-rails'
 end
 gem "thin", ">= 1.5.0"
+gem "ruby-debug19", :group => [:development, :test]
 
 gem "rspec-core", :group => [:development, :test]
 gem "rspec-expectations", :group => [:development, :test]

@@ -10,6 +10,7 @@ describe DogsController do
     sign_in @user
   end
 
+  #deprecated test, TODO: remove!
   describe "DateComponentsHelper" do
     it "should explode the date" do
       d = Date.new(2000)
@@ -27,17 +28,15 @@ describe DogsController do
       get :new
       response.should be_success
       response.should have_selector("input", :id => "dog_name")
-      response.should have_selector('select[@id="dog_birthday_1i"]/option')
-      response.should have_selector('select[@id="dog_birthday_2i"]/option')
-      response.should have_selector('select[@id="dog_birthday_3i"]/option')
+      response.should have_selector('input[@id="dog_birthday"]')
     end
   end
 
   describe "POST 'create'" do
 
     before(:each) do
-      @valid_attr = { :name => "Aron", :birthday => Date.new(2006,03,01) }
-      explode_date_comp(@valid_attr)
+      @valid_attr = { :name => "Aron", :birthday => Date.new(2006,03,01), :sex => "m" }
+      #explode_date_comp(@valid_attr)
 
       @invalid_attr = { :name => "" }
     end
@@ -82,10 +81,8 @@ describe DogsController do
         get :edit, :id => @dog
         response.should be_success
         response.should have_selector("input", :id => "dog_name", :value => @dog.name)
-        response.should have_selector('select[@id="dog_birthday_1i"]/option', :value => "#{@dog.birthday.year}")
-        response.should have_selector('select[@id="dog_birthday_2i"]/option', :value => "#{@dog.birthday.month}")  #January
-        response.should have_selector('select[@id="dog_birthday_3i"]/option', :value => "#{@dog.birthday.day}")
-      end
+        response.should have_selector('input[@id="dog_birthday"]', :value => "#{@dog.birthday}")
+     end
     end
 
     describe "PUT 'update'" do

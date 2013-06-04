@@ -6,7 +6,8 @@ describe Dog do
     @user = FactoryGirl.create(:user)
     @dog_attr = {
         :name => "Lara",
-        :birthday => "01.11.2007"
+        :birthday => "01.11.2007",
+        :sex => "f"
     }
 
     @skill_attr = {
