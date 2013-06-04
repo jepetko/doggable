@@ -47,10 +47,10 @@ class DogsController < ApplicationController
                                     :sex => p[:sex],
                                     :skill_ids => parse_skills(p[:skill_ids]) )
     if @dog.save
-      flash[:notice] = "Dog created!"
+      flash[:notice] = I18n.t '.create_success', :resource => @dog.name
       redirect_to dogs_path
     else
-      flash[:error] = "Dog couldn't be created."
+      flash[:error] = I18n.t 'dogs.create.create_failed', :resource => @dog.name
       render 'new'
     end
   end

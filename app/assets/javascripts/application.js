@@ -171,7 +171,6 @@ $(function() {
                             ' from {' + transformCss + ':rotateX( ' + from + 'deg ) translate(0px,' + trans + ')}'+
                             ' to {' + transformCss + ':rotateX( ' + to + 'deg ) translate(0px,' + trans + ') }'+
                             '}';
-                console.log(rule);
                 CssUtils.addRule(rule);
                 flappingDelays.push( Math.round(flappingDelays.last() * .75) );
             }
@@ -193,7 +192,6 @@ $(function() {
                             var postfix = parseInt(/\d+$/.exec(name)[0]);
                             var f = (postfix%2==0) ? 1 : -1;
                             var endValue = flappingDegrees[postfix+1] * f;
-                            console.log( "rotateX(" + endValue + "deg) translate(0px," + trans + ")" );
                             plate.css("transform", "rotateX(" + endValue + "deg) translate(0px," + trans + ")");
                     }
                 }
@@ -216,8 +214,6 @@ $(function() {
             anim = 'animstart ' + animstartDelay + 'ms,' + anim;
             animDelay = '0ms,' + animDelay;
             var animKeyword = Modernizr.prefixed('animation');
-            console.log( anim );
-            console.log( animDelay );
             plate.css( animKeyword, anim);
             plate.css( animKeyword + '-delay', animDelay);
             plate.css( animKeyword + '-timing-function', 'ease-start');
@@ -232,14 +228,15 @@ $(function() {
 ////////////////////////////////////// for dogs form
 
 $(function() {
-    $("#dog_birthday").datepicker();
+    $("#dog_birthday").datepicker({ dateFormat: 'yy-mm-dd' });
 });
 
 $(function() {
     $("#dog_picture").bind('change', function() {
 
-    })
+    });
+
     $("#dog_picture_trigger").bind('click', function() {
         $("#dog_picture").trigger('click');
-    })
+    });
 })
